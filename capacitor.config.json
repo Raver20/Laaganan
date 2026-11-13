@@ -1,0 +1,6 @@
+{
+  "appId": "com.laaganan.app",
+  "appName": "LAAGANAN",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}

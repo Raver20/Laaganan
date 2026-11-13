@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LAAGANAN</title>
+<style>
+:root{--bg:#f3f7fd;--card:#fff;--tx:#18202f;--mut:#7d889c;--g:#2d7ff9;--gl:#e8f1ff;--bd:#e4ebf5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#192030;--tx:#eef2fb;--mut:#97a3bb;--gl:#17305a;--bd:#262f45}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1420;--card:#192030;--tx:#eef2fb;--mut:#97a3bb;--gl:#17305a;--bd:#262f45}
+*{box-sizing:border-box;scrollbar-width:none}*::-webkit-scrollbar{display:none}html,body{height:100%;margin:0}
+[data-v],[data-gal],[data-det],[data-stat]{cursor:pointer}
+body{background:var(--bg);color:var(--tx);font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.45;display:flex;justify-content:center}
+#app{width:100%;max-width:440px;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+#ban{padding:14px 18px 4px;flex:none}
+.brow{display:flex;align-items:center;justify-content:space-between}
+h1{font-size:21px;margin:0;text-align:center}h3{margin:0 0 6px}
+#clock{font-size:12.5px;color:var(--mut);text-align:center;margin-top:2px}
+.ib{border:0;background:var(--card);width:42px;height:42px;border-radius:50%;font-size:18px;color:var(--tx);box-shadow:0 3px 10px #1b2a5518;flex:none}
+.pill{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:18px;padding:0 14px;margin-top:12px;box-shadow:0 4px 14px #1b2a5514}
+.pill input{border:0;background:none;width:auto;flex:1;min-width:0;padding:14px 0;color:var(--tx);font-size:15px;outline:none}
+#flt{display:none;gap:8px;margin-top:10px;flex-wrap:wrap}
+#flt select{background:var(--card);border:0;border-radius:14px;padding:10px 12px;box-shadow:0 3px 10px #1b2a5512}
+main{flex:1;overflow-y:auto;padding:12px 16px 110px}
+.card{background:var(--card);border-radius:22px;padding:14px;margin-bottom:12px;box-shadow:0 4px 16px #1b2a5512}
+.row{display:flex;gap:12px;align-items:center}
+.ph{width:78px;height:78px;border-radius:18px;flex:none;display:grid;place-items:center;font-size:34px;background-size:cover;background-position:center}
+.info{flex:1;min-width:0}.code{color:var(--g);font-size:12px;font-weight:600}
+.name{font-size:19px;font-weight:800;margin:2px 0}.addr{font-size:12.5px;color:var(--mut);line-height:1.4}
+.nav{width:42px;height:42px;border-radius:50%;border:0;background:var(--gl);font-size:19px;flex:none}
+.btns{display:flex;gap:8px;margin-top:10px}
+.go{border:0;background:var(--g);color:#fff;font-weight:700;padding:13px;border-radius:999px;font-size:15px;width:100%;box-shadow:0 8px 18px #2d7ff945}
+.sec{border:1.5px solid var(--g);background:none;color:var(--g);font-weight:700;padding:11px;border-radius:999px;width:100%;margin-top:8px;font-size:15px}
+.btns .sec{margin:0;width:auto;padding:11px 14px}
+.types{display:flex;justify-content:space-between;margin:2px 0 6px}
+.ty{display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:none;color:var(--tx);font-size:11px;width:19%;padding:0}
+.tc{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:24px;box-shadow:0 5px 12px #1b2a5522;border:3px solid transparent}
+.ty.on .tc{border-color:var(--card);outline:2.5px solid var(--g)}
+.rh{display:flex;align-items:center;justify-content:space-between;margin:14px 2px 10px}.rh b{font-size:17px}
+.vs{display:flex;gap:4px;background:var(--card);border-radius:12px;padding:3px;box-shadow:0 3px 10px #1b2a5512}
+.vs button{border:0;background:none;color:var(--mut);font-size:16px;padding:5px 9px;border-radius:9px}.vs button.on{background:var(--g);color:#fff}
+.gridc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gc{position:relative;aspect-ratio:.82;border-radius:22px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end;color:#fff;box-shadow:0 6px 16px #1b2a5526}
+.gc::before,.bigc::before{content:"";position:absolute;inset:0;background:linear-gradient(#0000 45%,#000b)}
+.gc .em,.bigc .em{position:absolute;top:30%;left:0;right:0;text-align:center;font-size:46px}
+.gc .t,.bigc .t{position:relative;padding:10px 12px;width:100%}.gc .t b,.bigc .t b{display:block;font-size:14px;line-height:1.2}.gc .t small,.bigc .t small{font-size:11px;opacity:.92}
+.bigc{position:relative;height:200px;border-radius:24px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:flex-end;color:#fff;margin-bottom:12px;box-shadow:0 8px 20px #1b2a5530}
+.bigc .t b{font-size:18px}.bigc .t small{font-size:12.5px}
+.lrow{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:20px;padding:10px;margin-bottom:10px;box-shadow:0 4px 14px #1b2a5512}
+.lth{width:84px;height:84px;border-radius:16px;flex:none;display:grid;place-items:center;font-size:32px;background-size:cover;background-position:center}
+.chip{display:inline-block;background:var(--gl);color:var(--g);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;margin-top:5px}
+.hrt{position:absolute;top:8px;left:8px;z-index:2;width:32px;height:32px;border-radius:50%;border:0;background:#ffffffe6;font-size:15px}
+.tabbar{position:absolute;left:14px;right:14px;bottom:12px;background:var(--card);display:flex;justify-content:space-around;align-items:center;padding:8px 10px;border-radius:30px;box-shadow:0 8px 26px #1b2a5530}
+.tab{border:0;background:none;font-size:21px;opacity:.5;color:var(--tx);padding:8px 11px;border-radius:16px}.tab.on{opacity:1;background:var(--gl)}
+.plus{width:52px;height:52px;border-radius:50%;border:0;background:var(--g);color:#fff;font-size:28px;box-shadow:0 6px 16px #2d7ff966}
+label{display:block;font-size:12px;color:var(--mut);margin:12px 0 4px}
+input,textarea,select{width:100%;padding:11px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-size:15px;font-family:inherit}
+select{flex:1;min-width:0;font-size:14px}
+.mrow{display:flex;justify-content:space-between;align-items:center;width:100%;background:var(--card);border:0;border-radius:18px;padding:16px;margin-bottom:8px;font-size:15px;color:var(--tx);font-weight:600;box-shadow:0 4px 14px #1b2a5512}
+.sheet{position:absolute;inset:0;background:#0007;display:none;align-items:flex-end;z-index:5}.sheet.show{display:flex}
+.panel{background:var(--card);width:100%;border-radius:28px 28px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px));max-height:90%;overflow:auto}
+.msg{background:var(--bg);border-radius:14px;padding:12px;font-size:13px;white-space:pre-wrap;margin:10px 0}
+.warn{background:#fff3cd;color:#664d03;border-radius:10px;padding:10px;font-size:13px;margin:10px 0}
+.empty{text-align:center;color:var(--mut);margin-top:40px;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+.grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px}
+.xdel{position:absolute;top:4px;right:4px;border:0;background:#000a;color:#fff;border-radius:999px;min-width:26px;height:26px;font-size:12px;padding:0 6px}
+.h2{font-weight:800;margin:16px 4px 8px}.sm{font-size:12.5px;color:var(--mut);line-height:1.5}
+#det{position:absolute;inset:0;background:var(--bg);z-index:4;overflow-y:auto}
+.drow{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;font-size:14px;border-bottom:1px solid var(--bd)}
+.st3{display:flex;gap:8px;margin:14px 0}.st3>div{flex:1;border:1px solid var(--bd);border-radius:14px;padding:10px 6px;text-align:center}.st3 b{display:block;font-size:15px;margin-top:3px}
+.fc{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px}.fc>div{flex:none;width:68px;text-align:center;background:var(--bg);border-radius:16px;padding:10px 4px;font-size:12px}
+body{-webkit-font-smoothing:antialiased}
+.wm{font-weight:800;letter-spacing:.16em;display:inline-flex;align-items:center;gap:8px;color:var(--tx)}
+.wm svg{width:22px;height:22px;color:var(--g)}
+h1.wm{font-size:18px}
+.tab svg,.ib svg{width:21px;height:21px;display:block;margin:auto}
+.card{border:1px solid var(--bd)}
+.go{letter-spacing:.01em}
+#toast{display:none}
+button,input,select,textarea{font-family:inherit}
+h1,h3,.name,.h2,.rh b{letter-spacing:-.01em}
+h1.wm{letter-spacing:.16em}
+.types{overflow-x:auto;gap:12px;justify-content:flex-start}.ty{flex:none;width:64px}
+button{transition:transform .15s,background .25s,opacity .25s,box-shadow .25s}button:active{transform:scale(.96)}
+.card,.lrow,.gc,.bigc{transition:transform .2s,box-shadow .25s}
+.gc:active,.bigc:active,.lrow:active{transform:scale(.985)}
+.tab{transition:background .25s,opacity .25s,transform .2s}.tab.on{transform:translateY(-2px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes sheetUp{from{transform:translateY(46px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes toastIn{from{transform:translateY(-22px);opacity:0}to{transform:none;opacity:1}}
+main.enter>*{animation:fadeUp .38s cubic-bezier(.2,.8,.2,1) both}
+main.enter>.gridc{animation:none}
+main.enter .gc,main.enter .bigc,main.enter .lrow{animation:pop .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*45ms)}
+#det.slide{animation:slideIn .32s cubic-bezier(.2,.8,.2,1)}
+.sheet.show{animation:fade .2s}.sheet.show .panel{animation:sheetUp .3s cubic-bezier(.2,.8,.2,1)}
+#wel{animation:fade .4s}#toast{animation:toastIn .3s}
+.mrow+.card{animation:fadeUp .25s ease}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div id="app">
+<div id="ban">
+<div class="brow"><button class="ib" id="sb" aria-label="Filters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h8M18 6h2M4 12h3M13 12h7M4 18h10M20 18h0"/><circle cx="15" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg></button><div><h1 id="title">Travel &amp; Hike</h1><div id="clock"></div></div><button class="ib" id="th" aria-label="Toggle light or dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg></button></div>
+<div id="sbar"><div class="pill"><span>🔍</span><input id="search" placeholder="Search your place"></div>
+<div id="flt"><select id="fltt" aria-label="Spot type"></select><select id="fltp" aria-label="Province"></select><select id="fltc" aria-label="City"></select></div></div>
+</div>
+<main id="main"><div class="empty">Loading…</div></main>
+<div class="tabbar">
+<button class="tab on" data-t="spots" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></button>
+<button class="tab" data-t="trips" aria-label="My trips"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
+<button class="plus" id="add" aria-label="Add spot">+</button>
+<button class="tab" data-t="saved" aria-label="Saved spots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.6-9 9-9 9z"/></svg></button>
+<button class="tab" data-t="acct" aria-label="Profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg></button>
+
+</div>
+<div id="toast" style="position:absolute;left:16px;right:16px;top:14px;z-index:12;background:#16a34a;color:#fff;padding:12px 14px;border-radius:14px;font-size:14px;box-shadow:0 8px 22px #0004"></div>
+<div id="det" style="display:none"></div>
+<div id="wel" style="display:none;position:absolute;inset:0;z-index:8;background:var(--bg);padding:30px 26px;flex-direction:column;align-items:center;text-align:center">
+<div class="wm" style="font-size:20px"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20l7-12 4 7 3-4.5L22 20z"/></svg>LAAGANAN</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;width:100%"><div style="position:relative;width:250px;height:250px;border-radius:50%;background:linear-gradient(180deg,#8fd0ff,#cfeaff 55%,#7fd18a 56%,#3f9e5a);box-shadow:0 16px 36px #2d7ff933;overflow:hidden"><span style="position:absolute;top:14%;right:16%;font-size:34px">☁️</span><span style="position:absolute;bottom:20%;left:16%;font-size:74px">⛰️</span><span style="position:absolute;bottom:14%;right:18%;font-size:54px">🌲</span></div></div>
+<h2 style="margin:10px 0 6px;font-size:28px;line-height:1.15">Your Ultimate<br>Hiking Guidance.</h2>
+<div class="sm" style="margin-bottom:24px">Keep hiking anywhere without any hassle.</div>
+<button class="go" id="wguest" style="max-width:260px;padding:15px;font-size:17px">Get started</button>
+<div class="sm" style="margin-top:16px">Have an account? <button id="wlogin" style="border:0;background:none;color:var(--g);font-weight:700;font-size:13px;padding:2px">Log in</button> · <button id="wsign" style="border:0;background:none;color:var(--g);font-weight:700;font-size:13px;padding:2px">Sign up</button></div>
+</div>
+<div id="lb" style="display:none;position:absolute;inset:0;background:#000e;z-index:9;align-items:center;justify-content:center"><img id="lbi" alt="" style="max-width:100%;max-height:100%;object-fit:contain"><button class="ib" id="lbx" aria-label="Close" style="position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:12px">✕</button><button class="ib" id="lbp" aria-label="Previous" style="position:absolute;left:8px">‹</button><button class="ib" id="lbn" aria-label="Next" style="position:absolute;right:8px">›</button></div>
+<div class="sheet" id="sheet"><div class="panel" id="panel"></div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-shim.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let db,user,uid=null,own=false,adm=false,sess=false,tab='spots',q='',fp='',fc='',ftp='',amode=null,rec=null,det=null,pend=null,tries=0,gal=null,sent=false,ok=false;
+let B=[],U={},P={},A={},T={},myAcc=null,myT=[],G=[],W=[],C={name:'',email:''};
+let aco='',lastView='',vs='grid';try{vs=localStorage.getItem('ts_vs')||'grid'}catch(e){}
+const EM=['⛰️','🏔️','🌄','🌿','☁️'],CL=['#9fb8a0','#8fc1e8','#b6d98a','#b5c7d3','#7fb06b'];
+const all=()=>{const L=B.map(d=>({...d,key:'b:'+d.id,owner:''}));for(const o in U)(U[o].items||[]).forEach(s=>L.push({...s,key:o+':'+s.id,owner:o}));return L};
+const photos=k=>{const r=[];for(const o in P)(P[o].items||[]).forEach(p=>{if(p.spot===k)r.push({...p,o})});return r};
+const mapsUrl=s=>'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination='+encodeURIComponent(s.lat&&s.lng?s.lat+','+s.lng:s.name+', '+s.addr);
+const pll=v=>{const a=String(v).split(',').map(x=>x.trim());return a.length===2&&a[0]!==''&&!isNaN(a[0])&&!isNaN(a[1])?a:['','']};
+const open=h=>{$('#panel').innerHTML=h;$('#sheet').classList.add('show')};
+const close=()=>{gal=null;$('#sheet').classList.remove('show')};
+const find=k=>all().find(s=>s.key===k);
+
+let TYPES={'Coastal & Beach':'Sandy shores, hidden coves, sandbars, and surfing breaks.','Freshwater & Falls':'Waterfalls, natural swimming holes, cold/hot springs, and rivers.','Mountain & Trail':'Hiking peaks, forest trails, rock canyons, and panoramic viewpoints.','Forest & Eco-Park':'Nature reserves, mangrove boardwalks, and wildlife sanctuaries.','Rural & Garden':'Flower farms, terraced fields, and countryside agricultural spots.'};
+let TS={'Coastal & Beach':['🏖️','#35c2ff','Coastal'],'Freshwater & Falls':['💧','#5b8cff','Falls'],'Mountain & Trail':['⛰️','#ff9f43','Mountain'],'Forest & Eco-Park':['🌲','#34c759','Forest'],'Rural & Garden':['🌾','#f5b82e','Rural']};
+const TYPES0={...TYPES},TS0={...TS};
+let CATS=[],catImg,catEdit;
+function applyCats(L){if(!L.length){TYPES={...TYPES0};TS={...TS0};return}TYPES={};TS={};L.forEach(c=>{TYPES[c.name]=c.desc||'';TS[c.name]=[c.icon||'📍',c.color||'#2d7ff9',c.short||String(c.name).split(/\s*&\s*|\s+/)[0],c.img||'']})}
+const imgOf=s=>(s.photos&&s.photos[0])||'';
+const bgOf=s=>`background-color:${s.c||'#7fb0ff'};${imgOf(s)?`background-image:url('${bu(esc(imgOf(s)))}')`:''}`;
+const wx=s=>W.find(w=>w.city===s.city&&w.prov===s.prov);
+function listing(L){
+ const sv=k=>((myAcc&&myAcc.saved)||[]).includes(k),h=(s,st)=>`<button class="hrt" data-sv="${esc(s.key)}" aria-label="Save" style="${st||''}">${sv(s.key)?'❤️':'🤍'}</button>`,loc=s=>esc([s.city,s.prov].filter(Boolean).join(', ')||'Philippines');
+ if(vs==='list')return L.map((s,i)=>`<div class="lrow" data-det="${esc(s.key)}" style="--i:${Math.min(i,9)}"><div class="lth" style="${bgOf(s)}">${imgOf(s)?'':esc(s.e||'⛰️')}</div><div class="info"><div class="name" style="font-size:16px">${esc(s.name)}</div><div class="addr">📍 ${loc(s)}</div>${s.type?`<span class="chip">${esc((TS[s.type]||[])[2]||s.type)}</span>`:''}</div>${h(s,'position:static;box-shadow:0 2px 8px #0002;flex:none')}</div>`).join('');
+ if(vs==='big')return L.map((s,i)=>`<div class="bigc" data-det="${esc(s.key)}" style="--i:${Math.min(i,9)};${bgOf(s)}">${imgOf(s)?'':`<div class="em">${esc(s.e||'⛰️')}</div>`}${h(s,'left:auto;right:12px;top:12px')}<div class="t"><b>${esc(s.name)}</b><small>📍 ${loc(s)}${s.type?' · '+esc(s.type):''}</small></div></div>`).join('');
+ return `<div class="gridc">${L.map((s,i)=>`<div class="gc" data-det="${esc(s.key)}" style="--i:${Math.min(i,9)};${bgOf(s)}">${imgOf(s)?'':`<div class="em">${esc(s.e||'⛰️')}</div>`}${h(s)}<div class="t"><b>${esc(s.name)}</b><small>📍 ${esc(s.city||s.prov||'Philippines')}</small></div></div>`).join('')}</div>`}
+const NCR='Metro Manila (NCR)';
+const PROV='Abra,Agusan del Norte,Agusan del Sur,Aklan,Albay,Antique,Apayao,Aurora,Basilan,Bataan,Batanes,Batangas,Benguet,Biliran,Bohol,Bukidnon,Bulacan,Cagayan,Camarines Norte,Camarines Sur,Camiguin,Capiz,Catanduanes,Cavite,Cebu,Cotabato,Davao de Oro,Davao del Norte,Davao del Sur,Davao Occidental,Davao Oriental,Dinagat Islands,Eastern Samar,Guimaras,Ifugao,Ilocos Norte,Ilocos Sur,Iloilo,Isabela,Kalinga,La Union,Laguna,Lanao del Norte,Lanao del Sur,Leyte,Maguindanao del Norte,Maguindanao del Sur,Marinduque,Masbate,Misamis Occidental,Misamis Oriental,Mountain Province,Negros Occidental,Negros Oriental,Northern Samar,Nueva Ecija,Nueva Vizcaya,Occidental Mindoro,Oriental Mindoro,Palawan,Pampanga,Pangasinan,Quezon,Quirino,Rizal,Romblon,Samar,Sarangani,Siquijor,Sorsogon,South Cotabato,Southern Leyte,Sultan Kudarat,Sulu,Surigao del Norte,Surigao del Sur,Tarlac,Tawi-Tawi,Zambales,Zamboanga del Norte,Zamboanga del Sur,Zamboanga Sibugay'.split(',');
+const CITIES=Object.fromEntries(Object.entries({
+'Cebu':'Alcantara,Alcoy,Alegria,Aloguinsan,Argao,Asturias,Badian,Balamban,Bantayan,Barili,Bogo City,Boljoon,Borbon,Carcar City,Carmen,Catmon,Cebu City,Compostela,Consolacion,Cordova,Daanbantayan,Dalaguete,Danao City,Dumanjug,Ginatilan,Lapu-Lapu City,Liloan,Madridejos,Malabuyoc,Mandaue City,Medellin,Minglanilla,Moalboal,Naga City,Oslob,Pilar,Pinamungajan,Poro,Ronda,Samboan,San Fernando,San Francisco,San Remigio,Santa Fe,Santander,Sibonga,Sogod,Tabogon,Tabuelan,Talisay City,Toledo City,Tuburan,Tudela',
+'Bohol':'Anda,Baclayon,Candijay,Carmen,Corella,Dauis,Jagna,Loboc,Panglao,Tagbilaran City,Tubigon,Ubay',
+'Negros Oriental':'Bais City,Bayawan City,Canlaon City,Dauin,Dumaguete City,Guihulngan City,Sibulan,Siaton,Tanjay City,Valencia,Zamboanguita',
+'Negros Occidental':'Bacolod City,Bago City,Cadiz City,Escalante City,Himamaylan City,Kabankalan City,La Carlota City,Sagay City,San Carlos City,Silay City,Sipalay City,Talisay City,Victorias City',
+'Davao del Sur':'Davao City,Digos City,Santa Cruz,Bansalan,Hagonoy',
+'Benguet':'Baguio City,Bokod,Itogon,Kabayan,La Trinidad,Tuba',
+'Rizal':'Antipolo City,Baras,Cainta,Rodriguez,Tanay,Taytay,Teresa',
+'Batangas':'Batangas City,Calatagan,Lian,Lipa City,Mabini,Nasugbu,Santo Tomas City,Tanauan City,Tingloy',
+'Laguna':'Biñan City,Cabuyao City,Calamba City,Los Baños,San Pablo City,San Pedro City,Santa Rosa City',
+'Cavite':'Alfonso,Bacoor City,Cavite City,Dasmariñas City,General Trias City,Imus City,Maragondon,Silang,Tagaytay City,Trece Martires City',
+'Albay':'Camalig,Daraga,Guinobatan,Legazpi City,Ligao City,Tabaco City',
+'Palawan':'Busuanga,Coron,El Nido,Puerto Princesa City,San Vicente,Taytay',
+'Aklan':'Buruanga,Kalibo,Malay,Nabas',
+'Bukidnon':'Impasug-ong,Malaybalay City,Manolo Fortich,Valencia City',
+'Misamis Oriental':'Cagayan de Oro City,El Salvador City,Gingoog City',
+'Pangasinan':'Alaminos City,Anda,Bolinao,Burgos,Dagupan City,San Carlos City,Urdaneta City',
+'Zambales':'Botolan,Iba,Olongapo City,Palauig,San Antonio,Subic',
+'Bataan':'Bagac,Balanga City,Dinalupihan,Mariveles,Morong',
+'Quezon':'General Nakar,Infanta,Lucban,Lucena City,Real,Sariaya,Tayabas City',
+'Metro Manila (NCR)':'Caloocan,Las Piñas,Makati,Malabon,Mandaluyong,Manila,Marikina,Muntinlupa,Navotas,Parañaque,Pasay,Pasig,Pateros,Quezon City,San Juan,Taguig,Valenzuela'
+}).map(([k,v])=>[k,v.split(',')]));
+const provOpts=v=>'<option value="">Select province</option>'+[NCR,...PROV].map(p=>`<option${p===v?' selected':''}>${esc(p)}</option>`).join('');
+const cityOpts=(pv,v)=>{const L=CITIES[pv]||[];return '<option value="">Select city / municipality</option>'+L.map(c=>`<option${c===v?' selected':''}>${esc(c)}</option>`).join('')+`<option value="__o"${v&&!L.includes(v)?' selected':''}>Other (type it)</option>`};
+const IC={'home': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>', 'clock': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>', 'heart': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.6-9 9-9 9z"/></svg>', 'user': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>', 'sliders': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h8M18 6h2M4 12h3M13 12h7M4 18h10M20 18h0"/><circle cx="15" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>', 'moon': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg>', 'sun': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg>'};
+const LOGO='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20l7-12 4 7 3-4.5L22 20z"/></svg>';
+const ago=t=>{const m=Math.max(0,Math.round((Date.now()-t)/60000));return m<60?m+' min ago':m<1440?Math.round(m/60)+' h ago':new Date(t).toLocaleDateString()};
+setInterval(()=>{if(det)detail(det)},60000);
+function tick(){const d=new Date(),el=$('#clock');if(el)el.innerHTML='🕒 '+d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'})+' · <b>'+d.toLocaleTimeString()+'</b>'}
+setInterval(tick,1000);tick();
+function theme(t){document.documentElement.dataset.theme=t;$('#th').innerHTML=t==='dark'?IC.sun:IC.moon;try{localStorage.setItem('ts_theme',t)}catch(e){}}
+{let t0=null;try{t0=localStorage.getItem('ts_theme')}catch(e){}theme(t0||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}
+let lbL=[],lbI=0;
+function lb(a,list){lbL=list&&list.includes(a)?list:[a];lbI=lbL.indexOf(a);showLb()}
+function showLb(){$('#lbi').src=bu(lbL[lbI]);$('#lb').style.display='flex';$('#lbp').style.visibility=$('#lbn').style.visibility=lbL.length>1?'visible':'hidden'}
+const ss=(k,v)=>{try{v?sessionStorage.setItem(k,v):sessionStorage.removeItem(k)}catch(e){}};
+const sg=k=>{try{return sessionStorage.getItem(k)}catch(e){return null}};
+const signed=()=>adm||!!(myAcc&&sess);
+const who=()=>myAcc||{name:'Admin',email:''};
+const salt=()=>Array.from(crypto.getRandomValues(new Uint32Array(3))).join('');
+async function H(p,sl){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(sl+':'+p));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+const signCard=()=>`<div class="card"><h3>Sign in</h3><label>Username</label><input id="su" autocapitalize="none" autocomplete="username"><label>Password</label><input id="sp" type="password" autocomplete="current-password"><div id="sm" class="sm" style="color:#c0392b;margin-top:6px"></div><button class="go" style="margin-top:10px" id="si">Sign in</button><button id="fgt" style="border:0;background:none;color:var(--g);font-size:13px;margin-top:8px;width:100%">Forgot password?</button></div>`;
+const SQS=['What is the name of your first pet?','What city were you born in?','What was the name of your first school?','What is your favorite hiking spot?','What is your mother’s maiden name?'];
+const sqOpts=v=>SQS.map(q=>`<option${q===v?' selected':''}>${esc(q)}</option>`).join('');
+const lguId=(p,c)=>'lgu_'+(p+'__'+c).replace(/[^a-z0-9]+/gi,'_').toLowerCase();
+const tel=n=>'tel:'+String(n).replace(/[^\d+]/g,'');
+function acctView(m){
+ if(pend&&!adm){m.innerHTML=`<div class="card"><h3>Security question</h3><div class="sm" style="margin-bottom:8px">${esc(pend.q)}</div><input id="qa" type="password" autocomplete="off" placeholder="Your answer"><div id="qe" class="sm" style="color:#c0392b;margin-top:6px"></div><button class="go" style="margin-top:10px" id="sq">Verify</button><button class="sec" id="qc">Cancel</button></div>`;return}
+ if(rec&&!adm&&!sess){
+  const msg=`<div id="rm" class="sm" style="color:#c0392b;margin-top:6px"></div>`;
+  m.innerHTML=rec.step===1?`<div class="card"><h3>Forgot password</h3><div class="sm">Enter your username, then answer your security question.</div><label>Username</label><input id="ru" autocapitalize="none">${msg}<button class="go" style="margin-top:10px" id="rc">Continue</button><button class="sec" id="rx">Back to login</button></div>`
+  :rec.step===2?`<div class="card"><h3>Security question</h3><div class="sm" style="margin-bottom:8px">${esc(rec.q)}</div><input id="ra" type="password" autocomplete="off" placeholder="Your answer"><label>New password (min 5)</label><input id="rn" type="password" autocomplete="new-password">${msg}<button class="go" style="margin-top:10px" id="rs">Reset password</button><button class="sec" id="rx">Cancel</button></div>`
+  :`<div class="card"><h3>Password updated ✓</h3><div class="sm">You can now sign in with your new password.</div><button class="go" style="margin-top:10px" id="rx">Back to login</button></div>`;return}
+ if(adm){m.innerHTML=`<div class="card"><div class="name" style="font-size:17px">Administrator</div><div class="sm">Signed in as admin.</div><button class="go" id="gadm" style="margin-top:12px">⚙️ Open admin page</button><button class="sec" id="so">Sign out</button></div>`;return}
+ if(myAcc&&myAcc.hash&&sess){
+  const f={
+   pw:`<label>Current password</label><input id="upc" type="password" autocomplete="current-password"><label>New password (min 5)</label><input id="upn" type="password" autocomplete="new-password"><div id="upm" class="sm" style="margin-top:6px"></div><button class="go" style="margin-top:10px" id="upb">Update password</button>`,
+   sq:`<div class="sm">Used if you forget your password.${myAcc.q?'':' <b>Not set yet.</b>'}</div><label>Current password</label><input id="sqp" type="password"><label>Question</label><select id="sqq" style="width:100%">${sqOpts(myAcc.q)}</select><label>Answer (min 3 characters)</label><input id="sqa" type="password" autocomplete="off"><div id="sqm" class="sm" style="margin-top:6px"></div><button class="go" style="margin-top:10px" id="sqb">Save security question</button>`,
+   ph:`<div class="sm">Choose a photo (max 5 MB).</div><label class="go" style="display:block;text-align:center;margin-top:10px">📷 Choose profile photo<input type="file" accept="image/*" id="av" style="display:none"></label>`,
+   em:`<div class="sm">Optional. Used to prepare the alert email when you go to a spot. Visible to you and the admin.</div><label>Contact name</label><input id="cn" value="${esc(C.name)}"><label>Contact email</label><input id="ce" type="email" value="${esc(C.email)}"><button class="go" style="margin-top:12px" id="sc">Save contact</button>`};
+  const row=(k,ic,l)=>`<button class="mrow" data-ac="${k}"><span>${ic} ${l}</span><span>${aco===k?'⌃':'›'}</span></button>${aco===k?`<div class="card" style="margin:6px 0 10px">${f[k]}</div>`:''}`;
+  m.innerHTML=`<div class="card" style="text-align:center"><div class="ph" ${myAcc.avatar?`data-v="${esc(myAcc.avatar)}"`:''} style="width:84px;height:84px;border-radius:50%;font-size:34px;margin:0 auto 8px;background-color:var(--gl);${myAcc.avatar?`background-image:url('${bu(esc(myAcc.avatar))}')`:''}">${myAcc.avatar?'':'👤'}</div><div class="name" style="font-size:18px">${esc(myAcc.name)}</div><div class="addr">@${esc(myAcc.username)}</div></div>`+row('pw','🔑','Change password')+row('sq','🛡️','Change security question')+row('ph','📷','Upload profile photo')+row('em','🚨','Emergency contact')+`<button class="sec" id="so" style="margin-top:14px">Sign out</button>`;return}
+ const mode=amode;
+ const cr=`<div class="card"><h3>${myAcc?'Set up your sign-in':'Create your account'}</h3><div class="sm">Sign in is required to go to spots, add spots and add photos.</div><label>Display name</label><input id="an" value="${esc(myAcc&&myAcc.name)}"><label>Email</label><input id="ae" type="email" value="${esc(myAcc&&myAcc.email)}"><label>Username</label><input id="au" autocapitalize="none"><label>Password (min 5 characters)</label><input id="ap" type="password" autocomplete="new-password"><label>Security question (for forgot password)</label><select id="asq" style="width:100%">${sqOpts(myAcc&&myAcc.q)}</select><label>Answer (min 3 characters)</label><input id="asa" type="password" autocomplete="off"><div id="am" class="sm" style="color:#c0392b;margin-top:6px"></div><button class="go" style="margin-top:10px" id="mk">${myAcc?'Save sign-in':'Create account'}</button></div>`;
+ if(!mode){m.innerHTML=`<div class="card" style="text-align:center;padding:28px 18px"><div class="wm" style="font-size:20px;margin-bottom:8px">${LOGO}LAAGANAN</div><div class="sm" style="margin-bottom:20px">Sign in to go to spots, save places and share photos.</div><button class="go" data-am="up">Create account</button><button class="sec" data-am="in" style="margin-top:10px">Sign in</button></div>`;return}
+ const back=`<button data-am="" style="border:0;background:none;color:var(--g);font-size:14px;font-weight:600;padding:4px 2px;margin-bottom:8px">‹ Back</button>`;
+ m.innerHTML=back+(mode==='up'?(myAcc&&myAcc.hash?`<div class="warn">An account already exists on this device. Please sign in.</div>`+signCard():cr):signCard());
+}
+function savedView(m){
+ if(!signed()||!myAcc){m.innerHTML='<div class="empty">Sign in to save spots and see the places you have visited.</div>';return}
+ const fin=myT.filter(t=>t.status==='finished'),vis=new Set(fin.map(t=>t.spot)).size,L=(myAcc.saved||[]).map(find).filter(Boolean);
+ m.innerHTML=`<div class="card" style="display:flex;gap:10px;text-align:center"><div style="flex:1"><div class="name">${vis}</div><div class="sm">Spots visited</div></div><div style="flex:1"><div class="name">${fin.length}</div><div class="sm">Trips finished</div></div><div style="flex:1"><div class="name">${L.length}</div><div class="sm">Saved</div></div></div>`+(L.length?L.map((s,i)=>`<div class="card"><div class="row"><div class="ph" data-gal="${esc(s.key)}" style="width:64px;height:64px;font-size:26px;background-color:${s.c||'#9fb8a0'};${(s.photos&&s.photos[0])?`background-image:url('${bu(esc((s.photos&&s.photos[0])))}')`:''}">${(s.photos&&s.photos[0])?'':esc(s.e||'⛰️')}</div><div class="info"><div class="name" style="font-size:16px">${esc(s.name)}</div><div class="addr">${esc([s.city,s.prov].filter(Boolean).join(', '))}${s.type?'<br>'+esc(s.type):''}</div></div><button class="nav" data-map="${esc(s.key)}" aria-label="Open in Google Maps">🧭</button></div><div class="btns"><button class="go" data-go="${esc(s.key)}">Go to spot</button><button class="sec" data-sos="${esc(s.key)}" aria-label="Emergency info">🆘</button><button class="sec" data-sv="${esc(s.key)}" aria-label="Remove from saved">❤️</button></div></div>`).join(''):'<div class="empty">No saved spots yet. Tap 🤍 on a spot to save it.</div>');
+}
+function sos(k){const s=find(k);if(!s)return;const g=G.find(x=>x.prov===s.prov&&x.city===s.city);
+ const row=(l,n)=>`<a href="${tel(n)}" style="display:flex;justify-content:space-between;gap:8px;padding:12px;background:var(--bg);border-radius:12px;margin-bottom:6px;color:var(--tx);text-decoration:none"><span>${esc(l)}</span><b style="color:var(--g)">📞 ${esc(n)}</b></a>`;
+ open(`<h3>🆘 Emergency info</h3><div class="sm">${esc(s.name)} · ${esc([s.city,s.prov].filter(Boolean).join(', ')||'location not set')}</div><div class="h2" style="margin:14px 0 6px">National</div>${row('National Emergency Hotline','911')}${row('Philippine Red Cross','143')}<div class="h2" style="margin:14px 0 6px">${esc(s.city||'Local')} LGU</div>${g&&(g.entries||[]).length?g.entries.map(e=>row(e.l,e.n)).join(''):'<div class="sm">No emergency numbers saved for this LGU yet. The admin can add them.</div>'}<button class="sec" id="x">Close</button>`)}
+function lguForm(g){const oth=g&&g.city&&!(CITIES[g.prov]||[]).includes(g.city),d=g?'disabled':'';
+ open(`<h3>${g?'Edit':'Add'} LGU emergency contacts</h3><div class="sm">One per line as <b>Label | Number</b>. Use numbers verified with the LGU.</div><label>Province *</label><select id="fp2" ${d} style="width:100%">${provOpts(g&&g.prov)}</select><label>City / Municipality *</label><select id="fc2" ${d} style="width:100%">${cityOpts(g&&g.prov,g&&g.city)}</select><input id="fc3" ${d} placeholder="Type city or municipality" value="${esc(oth?g.city:'')}" style="margin-top:6px;display:${oth?'block':'none'}"><label>Contacts</label><textarea id="le" rows="6" placeholder="CDRRMO | number&#10;Police | number&#10;Fire | number&#10;Hospital | number">${esc(g?(g.entries||[]).map(e=>e.l+' | '+e.n).join('\n'):'')}</textarea><div id="fm" class="sm" style="color:#c0392b;margin-top:6px"></div><button class="go" style="margin-top:10px" id="ls">Save</button>${g?`<button class="sec" id="ld" data-id="${esc(lguId(g.prov,g.city))}" style="border-color:#c0392b;color:#c0392b">Delete</button>`:''}<button class="sec" id="x">Cancel</button>`)}
+const lguAdmin=()=>`<div class="h2">LGU emergency contacts (${G.length})</div><button class="go" style="margin:0 0 10px" id="addlgu">+ Add LGU contacts</button>`+G.map(g=>`<div class="card"><div class="row"><div class="info"><div class="name" style="font-size:15px">${esc(g.city)}, ${esc(g.prov)}</div><div class="addr">${(g.entries||[]).map(e=>esc(e.l)+': '+esc(e.n)).join('<br>')}</div></div><button class="nav" data-lgu="${esc(lguId(g.prov,g.city))}" aria-label="Edit">✏️</button></div></div>`).join('');
+function fillFlt(){const L=all(),ps=[...new Set(L.map((s,i)=>s.prov).filter(Boolean))].sort(),cs=[...new Set(L.filter(s=>!fp||s.prov===fp).map(s=>s.city).filter(Boolean))].sort();
+ $('#fltt').innerHTML='<option value="">All spot types</option>'+Object.keys(TYPES).map(t=>`<option${t===ftp?' selected':''}>${esc(t)}</option>`).join('');
+ $('#fltp').innerHTML='<option value="">All provinces</option>'+ps.map(p=>`<option${p===fp?' selected':''}>${esc(p)}</option>`).join('');
+ $('#fltc').innerHTML='<option value="">All cities</option>'+cs.map(c=>`<option${c===fc?' selected':''}>${esc(c)}</option>`).join('')}
+function render(){
+ const m=$('#main');
+ if(!ok){return}
+ {const ae=document.activeElement;if(ae&&ae.closest&&ae.closest('#main')&&/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)&&ae.type!=='file')return}
+ if(pend&&document.activeElement&&document.activeElement.id==='qa')return;
+ if(document.activeElement&&document.activeElement.id==='aq')return;
+ if(rec&&document.activeElement&&/^r[aun]$|^sq[pa]$/.test(document.activeElement.id))return;
+$('#clock').style.display=tab==='spots'?'block':'none';if(tab==='admin'&&!adm)tab='acct';
+ $('#title').className=tab==='spots'?'wm':'';$('#title').innerHTML=tab==='spots'?LOGO+'LAAGANAN':{trips:'My Trips',saved:'Saved Spots',acct:'Profile',admin:'Admin'}[tab];
+ $('#sb').style.visibility=tab==='spots'?'visible':'hidden';$('#sbar').style.display=tab==='spots'?'block':'none';
+ document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===(tab==='admin'?'acct':tab)));
+ {const vk=tab+(tab==='admin'?asub:'')+(tab==='spots'?vs:'');if(vk!==lastView){lastView=vk;m.scrollTop=0;m.classList.remove('enter');void m.offsetWidth;m.classList.add('enter');clearTimeout(window._et);window._et=setTimeout(()=>m.classList.remove('enter'),800)}}
+ if(tab==='spots'){
+  fillFlt();const L=all().filter(s=>(s.name+' '+s.addr+' '+(s.city||'')+' '+(s.prov||'')+' '+(s.type||'')).toLowerCase().includes(q)&&(!fp||s.prov===fp)&&(!fc||s.city===fc)&&(!ftp||s.type===ftp));
+  m.innerHTML=`<div class="types">${Object.entries(TS).map(([t,[e,c,n,im]])=>`<button class="ty${ftp===t?' on':''}" data-ty="${esc(t)}"><span class="tc" style="background:${c}">${im?`<img src="${bu(esc(im))}" alt="" style="width:30px;height:30px;object-fit:cover;border-radius:50%">`:e}</span>${n}</button>`).join('')}</div>
+  <div class="rh"><b>Recommended</b><span class="vs">${[['grid','▦'],['list','☰'],['big','▭']].map(([k,i])=>`<button class="${vs===k?'on':''}" data-vs="${k}" aria-label="${k} view">${i}</button>`).join('')}</span></div>`+(L.length?listing(L):'<div class="empty">No spots found. Tap + to add one.</div>');
+ }else if(tab==='trips'){
+  tripsView(m);
+ }else if(tab==='saved'){
+  savedView(m);
+ }else if(tab==='acct'){
+  acctView(m);
+ }else if(tab==='admin'&&adm){
+  adminView(m);
+ }
+ if(det)detail(det);
+ if(gal)gallery(gal);
+ ensureWatch();
+}
+
+const MAXP=10,MAXB=5*1024*1024;
+const canSp=s=>s.owner?s.owner===uid:adm;
+const myCount=k=>{const s=find(k);return ((P[uid]||{}).items||[]).filter(p=>p.spot===k).length+(s&&canSp(s)?(s.photos||[]).length:0)};
+const chk=(k,f)=>f.size>MAXB?'Each photo must be 5 MB or less.':myCount(k)>=MAXP?'You can upload up to 10 photos per spot.':'';
+function gallery(k){const s=find(k);if(!s){close();return}gal=k;const sp=s.photos||[],mem=photos(k),can=canSp(s),left=Math.max(0,MAXP-myCount(k));
+ const none='<div class="sm" style="grid-column:1/-1">None yet.</div>';
+ const gs=sp.map(x=>`<div style="position:relative"><img src="${bu(esc(x))}" data-v="${esc(x)}" data-g="sp" alt="">${can?`<button class="xdel" data-dsp="${esc(x)}" aria-label="Delete photo">🗑</button>`:''}</div>`).join('')||none;
+ const gm=mem.map(p=>`<div style="position:relative"><img src="${bu(esc(p.aid))}" data-v="${esc(p.aid)}" data-g="mem" alt="">${p.o===uid?`<button class="xdel" data-dm="${esc(p.aid)}" aria-label="Delete memory">🗑</button>`:''}</div>`).join('')||none;
+ open(`<h3>${esc(s.name)}</h3><div class="sm">Max 10 photos per account per spot, 5 MB each. You can add ${left} more here.</div>
+ <div class="h2" style="margin:12px 0 2px">Spot photos (${sp.length})</div><div class="sm">Official photos. Only the account that added the spot can upload them. The first one is the listing photo.</div><div class="grid">${gs}</div>
+ ${can?`<label class="go" style="display:block;text-align:center">📷 Add spot photo<input type="file" accept="image/*" id="sf" data-k="${esc(k)}" style="display:none"></label>`:''}
+ <div class="h2" style="margin:18px 0 2px">Memories (${mem.length})</div><div class="sm">Photos from visitors’ trips. You can delete your own.</div><div class="grid">${gm}</div>
+ <label class="sec" style="display:block;text-align:center">📷 Add memory<input type="file" accept="image/*" id="pf" data-k="${esc(k)}" style="display:none"></label><button class="sec" id="x">Close</button>`)}
+let asub='ov',aq='',aopen=[];
+const st=(n,l,i,k)=>`<div class="card" data-stat="${k}" style="margin:0;text-align:center;padding:14px 8px;cursor:pointer"><div style="font-size:22px">${i}</div><div class="name" style="margin:2px 0">${n}</div><div class="sm">${l}</div></div>`;
+function aList(){
+ if(asub==='sp'){
+  const L=all().filter(s=>(s.name+' '+s.addr+' '+(s.city||'')+' '+(s.prov||'')+' '+(s.type||'')).toLowerCase().includes(aq)).sort((a,b)=>a.name.localeCompare(b.name));
+  return L.length?L.map((s,i)=>{const w=[!s.city&&'no city',!s.type&&'no type',!(s.lat&&s.lng)&&'no coordinates'].filter(Boolean);return `<div class="card"><div class="row"><div class="ph" style="width:56px;height:56px;font-size:24px;background-color:${s.c||'#7fb0ff'};${(s.photos&&s.photos[0])?`background-image:url('${bu(esc((s.photos&&s.photos[0])))}')`:''}">${(s.photos&&s.photos[0])?'':esc(s.e||'⛰️')}</div><div class="info"><div class="name" style="font-size:15px">${esc(s.name)}</div><div class="addr">${esc([s.city,s.prov].filter(Boolean).join(', ')||'No city/province')}${s.type?' · '+esc(s.type):''}<br>${s.owner?'Added by '+esc((A[s.owner]||{}).name||'a user'):'Base spot'} · <b>${cnt(s.key)}</b> clicks</div>${w.length?`<div class="sm" style="color:#c27b00">⚠ ${w.join(', ')}</div>`:''}</div><button class="nav" data-edit="${esc(s.key)}" aria-label="Edit">✏️</button></div></div>`}).join(''):'<div class="empty">No spots match.</div>';
+ }
+ const ids=Object.keys(A).filter(i=>((A[i].name||'')+' '+(A[i].email||'')+' '+(A[i].username||'')).toLowerCase().includes(aq));
+ return ids.length?ids.map(i=>{const a=A[i],t=(T[i]||{}).items||[],on=t.filter(x=>x.status==='ongoing').length,fn=t.filter(x=>x.status==='finished').length,op=aopen.includes(i);
+  const mini=(n,l)=>`<div style="flex:1;background:var(--bg);border-radius:12px;padding:8px 4px"><b>${n}</b><div class="sm">${l}</div></div>`;
+  return `<div class="card"><div class="row"><div class="ph" ${a.avatar?`data-v="${esc(a.avatar)}"`:''} style="width:48px;height:48px;border-radius:50%;font-size:22px;background-color:var(--gl);${a.avatar?`background-image:url('${bu(esc(a.avatar))}')`:''}">${a.avatar?'':'👤'}</div><div class="info"><div class="name" style="font-size:15px">${esc(a.name)}</div><div class="addr">@${esc(a.username||'—')} · ${esc(a.email||'no email')}<br>Emergency: ${esc(a.contactName||'none')} ${esc(a.contactEmail||'')}</div></div></div>
+  <div style="display:flex;gap:6px;margin-top:10px;text-align:center">${mini(t.length,'Trips')}${mini(fn,'Finished')}${mini(on,'Ongoing')}</div>
+  <button class="sec" data-ao="${esc(i)}" style="padding:8px;font-size:13px">${op?'Hide':'View'} trips (${t.length})</button>
+  ${op?`<div class="sm" style="margin-top:8px">${t.slice(0,50).map(x=>'• '+esc(x.name)+' · '+new Date(x.at).toLocaleString()+(x.status==='finished'?' ✅':x.status==='ongoing'?' 🟢':'')).join('<br>')||'No trips.'}</div>`:''}</div>`}).join(''):'<div class="empty">No accounts match.</div>';
+}
+function adminView(m){
+ const ids=Object.keys(A),trips=Object.values(T).flatMap(t=>t.items||[]),ongoing=trips.filter(x=>x.status==='ongoing').length,fin=trips.filter(x=>x.status==='finished').length;
+ const tabs=[['ov','📊','Overview'],['sp','📍','Spots ('+all().length+')'],['cat','🏷️','Categories ('+Object.keys(TYPES).length+')'],['lg','🆘','LGU ('+G.length+')'],['ac','👥','Accounts ('+ids.length+')'],['st','⚙','Settings']];
+ const nav=`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">${tabs.map(([k,i,l])=>`<button class="${asub===k?'go':'sec'}" data-as="${k}" style="margin:0;width:auto;padding:9px 14px;font-size:13px;flex:none;box-shadow:none">${i} ${l}</button>`).join('')}</div>`;
+ let b='';
+ if(asub==='ov'){
+  const top=all().map(s=>({s,c:cnt(s.key)})).filter(x=>x.c).sort((a,b)=>b.c-a.c).slice(0,5);
+  const rec=Object.entries(T).flatMap(([u,d])=>(d.items||[]).map(x=>({...x,u}))).sort((a,b)=>b.at-a.at).slice(0,8);
+  b=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${st(all().length,'Spots','📍','spots')}${st(ids.length,'Accounts','👥','accounts')}${st(trips.length,'Trips started','👣','trips')}${st(ongoing,'Ongoing now','🟢','ongoing')}${st(fin,'Finished','✅','finished')}${st(G.length,'LGUs with contacts','🆘','lgu')}${st(Object.keys(TYPES).length,'Categories','🏷️','cats')}${st(all().reduce((n,x)=>n+(x.photos||[]).length,0)+Object.values(P).reduce((n,d)=>n+((d.items||[]).length),0),'Photos','🖼️','photos')}</div>
+  <div class="h2">Most visited spots</div>${top.length?`<div class="card">${top.map(x=>`<div class="drow"><span style="flex:1">${esc(x.s.name)}</span><b>${x.c}</b></div>`).join('')}</div>`:'<div class="sm" style="margin:0 4px">No trips yet.</div>'}
+  <div class="h2">Recent activity</div>${rec.length?`<div class="card">${rec.map(x=>`<div class="drow"><span style="flex:1"><b>${esc((A[x.u]||{}).name||'Account')}</b> → ${esc(x.name)}<br><span class="sm">${new Date(x.at).toLocaleString()}</span></span><span>${x.status==='finished'?'✅':x.status==='ongoing'?'🟢':''}</span></div>`).join('')}</div>`:'<div class="sm" style="margin:0 4px">No activity yet.</div>'}`;
+ }else if(asub==='sp'||asub==='ac'){
+  b=(asub==='sp'?'<button class="go" id="add2" style="margin-bottom:10px">+ Add spot</button>':'')+`<input id="aq" placeholder="Search ${asub==='sp'?'spots':'accounts'}…" value="${esc(aq)}" style="margin-bottom:10px"><div id="alist">${aList()}</div>`;
+ }else if(asub==='cat'){b=catAdmin()}else if(asub==='lg'){b=lguAdmin()}
+ else{const f={
+   a:`<label>Current password</label><input id="cpw" type="password"><label>New username</label><input id="cnu" autocapitalize="none"><label>New password (min 5)</label><input id="cnp" type="password"><div id="cam" class="sm" style="color:#c0392b;margin-top:6px"></div><button class="go" style="margin-top:10px" id="cadm">Update admin login</button>`,
+   s:`<div class="sm">Asked after your password when signing in as admin. Answers are not case-sensitive.</div><label>Current password</label><input id="qpw" type="password"><label>New question</label><input id="qq"><label>Answer (min 3 characters)</label><input id="qans" type="password" autocomplete="off"><div id="qm" class="sm" style="color:#c0392b;margin-top:6px"></div><button class="go" style="margin-top:10px" id="cq">Update security question</button>`};
+  const row=(k,ic,l)=>`<button class="mrow" data-ac="${k}"><span>${ic} ${l}</span><span>${aco===k?'⌃':'›'}</span></button>${aco===k?`<div class="card" style="margin:6px 0 10px">${f[k]}</div>`:''}`;
+  b=row('a','🔑','Admin username & password')+row('s','🛡️','Security question')}
+ m.innerHTML='<button class="sec" id="aback" style="margin:0 0 10px;width:auto;padding:8px 14px;font-size:13px">← Back to profile</button>'+nav+b;
+}
+function statSheet(k){
+ const rows=Object.entries(T).flatMap(([u,d])=>(d.items||[]).map(x=>({...x,u}))).sort((a,b)=>b.at-a.at);
+ const tr=L=>L.length?L.map(x=>`<div class="drow"><span style="flex:1"><b>${esc((A[x.u]||{}).name||'Account')}</b> → ${esc(x.name)}<br><span class="sm">${new Date(x.at).toLocaleString()}${x.finishedAt?' · finished '+new Date(x.finishedAt).toLocaleString():''}</span></span><span>${x.status==='finished'?'✅':x.status==='ongoing'?'🟢':''}</span></div>`).join(''):'<div class="sm">Nothing here yet.</div>';
+ let t,b;
+ if(k==='spots'){t='All spots';b=all().sort((a,b)=>a.name.localeCompare(b.name)).map(x=>`<div class="drow"><span style="flex:1"><b>${esc(x.name)}</b><br><span class="sm">${esc([x.city,x.prov].filter(Boolean).join(', ')||'No city/province')}${x.type?' · '+esc(x.type):''}<br>${x.owner?'Added by '+esc((A[x.owner]||{}).name||'a user'):'Base spot'}</span></span><span><b>${cnt(x.key)}</b><br><span class="sm">clicks</span></span></div>`).join('')}
+ else if(k==='accounts'){t='All accounts';b=Object.keys(A).map(i=>`<div class="drow"><span style="flex:1"><b>${esc(A[i].name)}</b><br><span class="sm">@${esc(A[i].username||'—')} · ${esc(A[i].email||'no email')}</span></span><span><b>${((T[i]||{}).items||[]).length}</b><br><span class="sm">trips</span></span></div>`).join('')||'<div class="sm">No accounts yet.</div>'}
+ else if(k==='trips'){t='All trips started';b=tr(rows)}
+ else if(k==='ongoing'){t='Ongoing trips';b=tr(rows.filter(x=>x.status==='ongoing'))}
+ else if(k==='finished'){t='Finished trips';b=tr(rows.filter(x=>x.status==='finished'))}
+ else if(k==='cats'){t='Categories';b=Object.keys(TYPES).map(n=>`<div class="drow"><span style="flex:1"><b>${esc((TS[n]||[])[0]||'')} ${esc(n)}</b><br><span class="sm">${esc(TYPES[n]||'')}</span></span><span><b>${all().filter(x=>x.type===n).length}</b><br><span class="sm">spots</span></span></div>`).join('')}
+ else if(k==='photos'){t='Photos per spot';b=all().map(x=>`<div class="drow"><span style="flex:1"><b>${esc(x.name)}</b></span><span class="sm">${(x.photos||[]).length} spot · ${photos(x.key).length} memories</span></div>`).join('')}
+ else{t='LGUs with contacts';b=G.map(g=>`<div class="drow"><span style="flex:1"><b>${esc(g.city)}, ${esc(g.prov)}</b><br><span class="sm">${(g.entries||[]).map(e=>esc(e.l)+': '+esc(e.n)).join('<br>')}</span></span></div>`).join('')||'<div class="sm">None yet.</div>'}
+ open(`<h3>${t}</h3><div style="margin-top:6px">${b}</div><button class="sec" id="x">Close</button>`)}
+function catAdmin(){return `<button class="go" id="addcat" style="margin-bottom:10px">+ Add category</button>`+Object.entries(TS).map(([n,[e,c,sh,img]])=>`<div class="card"><div class="row"><div class="ph" style="width:52px;height:52px;border-radius:50%;background:${c};font-size:24px">${img?`<img src="${bu(esc(img))}" alt="" style="width:32px;height:32px;object-fit:cover;border-radius:50%">`:e}</div><div class="info"><div class="name" style="font-size:15px">${esc(n)}</div><div class="addr">${esc(TYPES[n]||'No description')}<br>${all().filter(x=>x.type===n).length} spots</div></div><button class="nav" data-ecat="${esc(n)}" aria-label="Edit">✏️</button></div></div>`).join('')}
+function catForm(n){const c=n?(CATS.find(x=>x.name===n)||{name:n,desc:TYPES[n]||'',icon:(TS[n]||[])[0],color:(TS[n]||[])[1],img:(TS[n]||[])[3]}):null;catImg=undefined;catEdit=n||null;
+ open(`<h3>${n?'Edit':'Add'} category</h3><label>Name *</label><input id="cnm" value="${esc(c&&c.name)}" ${n?'disabled':''}>${n?'<div class="sm">The name cannot change once spots use it.</div>':''}<label>Description</label><textarea id="cds" rows="2">${esc(c&&c.desc)}</textarea><label>Icon (emoji)</label><input id="cic" maxlength="8" value="${esc((c&&c.icon)||'📍')}"><label>Icon image (optional, max 5 MB)</label><label class="sec" style="display:block;text-align:center;margin:0">🖼 Upload icon image<input type="file" accept="image/*" id="cimg" style="display:none"></label>${c&&c.img?'<button class="sec" id="crm" style="border-color:var(--bd);color:var(--mut)">Remove current image</button>':''}<div id="cmsg" class="sm" style="margin-top:6px"></div><label>Color</label><input id="ccl" type="color" value="${esc((c&&c.color)||'#2d7ff9')}" style="height:44px;padding:4px"><button class="go" style="margin-top:12px" id="cs">Save category</button>${n?`<button class="sec" id="cd" style="border-color:#c0392b;color:#c0392b">Delete category</button>`:''}<button class="sec" id="x">Cancel</button>`)}
+function closeDet(){det=null;$('#det').style.display='none'}
+function detail(k){const s=find(k);if(!s){closeDet();return}
+ const old=$('#det').scrollTop,first=det!==k;det=k;
+ const sp=s.photos||[],mem=photos(k).length,sv=((myAcc&&myAcc.saved)||[]).includes(k),loc=[s.city,s.prov].filter(Boolean).join(', '),w=wx(s);
+ const live='https://www.google.com/search?q='+encodeURIComponent('weather '+(s.city||'')+' '+(s.prov||'Philippines'));
+ $('#det').style.display='block';
+ $('#det').innerHTML=`<div style="height:290px;position:relative;${bgOf(s)};background-size:cover;background-position:center">
+  ${imgOf(s)?'':`<div style="position:absolute;top:70px;left:0;right:0;text-align:center;font-size:78px">${esc(s.e||'⛰️')}</div>`}
+  <button class="ib" id="dback" aria-label="Back" style="position:absolute;top:14px;left:14px;z-index:2">‹</button>
+  <button class="ib" data-sv="${esc(k)}" aria-label="Save" style="position:absolute;top:14px;right:14px;z-index:2">${sv?'❤️':'🤍'}</button></div>
+ <div style="margin-top:-56px;padding:0 14px 40px;position:relative"><div class="card" style="padding:18px 16px">
+  <div style="font-size:21px;font-weight:800">${esc(s.name)}</div><div class="addr" style="margin-top:2px">📍 ${esc(loc||s.addr)}</div>
+  <div class="st3"><div><span class="sm">Weather</span><b>${w?w.cur.e+' '+w.cur.t+'°C':'—'}</b></div><div><span class="sm">Rain chance</span><b>${w&&w.days[0]?w.days[0].p+'%':'—'}</b></div><div><span class="sm">Type</span><b>${esc((TS[s.type]||[])[2]||'—')}</b></div></div>
+  <div class="sm" style="color:var(--tx)">${esc(TYPES[s.type]||'')}${TYPES[s.type]?'<br>':''}${esc(s.addr)}</div>
+  ${adm?`<div class="sm" style="margin-top:6px">👣 ${cnt(k)} “Go to spot” clicks</div>`:''}
+  <div class="rh" style="margin:18px 0 8px"><b>Gallery</b><button data-gal="${esc(k)}" style="border:0;background:none;color:var(--g);font-size:13px">See all (${sp.length+mem}) ›</button></div>
+  ${sp.length?`<div style="display:flex;gap:8px;overflow-x:auto">${sp.map(x=>`<img src="${bu(esc(x))}" data-v="${esc(x)}" alt="" style="width:92px;height:92px;object-fit:cover;border-radius:16px;flex:none">`).join('')}</div>`:'<div class="sm">No spot photos yet.</div>'}
+  <div class="rh" style="margin:18px 0 8px"><b>Weather forecast</b><a href="${live}" target="_blank" rel="noopener" style="color:var(--g);font-size:13px;text-decoration:none">Live forecast ↗</a></div>
+  ${w?`<div class="fc">${w.days.map(d=>`<div><b>${esc(d.d)}</b><div style="font-size:22px;margin:4px 0">${d.e}</div>${d.hi}° / ${d.lo}°<div class="sm">💧${d.p}%</div></div>`).join('')}</div><div class="sm">${esc(s.city)} · updated ${ago(w.at)}${Date.now()-w.at>3600000?' · ⚠ older than 1 hour':''}</div>`:`<div class="sm">${s.city?'No saved forecast for '+esc(s.city)+' yet. Tap Live forecast for current weather.':'Add a city to this spot to see its forecast.'}</div>`}
+  <button class="go" data-go="${esc(k)}" style="margin-top:18px;padding:15px;font-size:16px">Go to spot</button>
+  <div class="btns" style="margin-top:10px"><button class="sec" data-map="${esc(k)}" style="flex:1;margin:0">🧭 Maps</button><button class="sec" data-sos="${esc(k)}" style="flex:1;margin:0">🆘 Emergency</button></div>
+ </div></div>`;
+ if(first){const e=$('#det');e.classList.remove('slide');void e.offsetWidth;e.classList.add('slide')}
+ $('#det').scrollTop=old}
+function needAcct(){open(`<h3>Sign in first</h3><div class="sm">You need to be signed in to go to spots, add spots or add photos.</div><button class="go" style="margin-top:12px" id="toacct">Sign in</button><button class="sec" id="x">Cancel</button>`)}
+
+const loc=()=>new Promise((res,rej)=>{if(!navigator.geolocation)return rej({code:0});navigator.geolocation.getCurrentPosition(p=>res({lat:+p.coords.latitude.toFixed(6),lng:+p.coords.longitude.toFixed(6),acc:Math.round(p.coords.accuracy)}),e=>rej(e),{enableHighAccuracy:true,timeout:15000,maximumAge:0})});
+function dist(a,b){const R=6371,r=x=>x*Math.PI/180,dl=r(b.lat-a.lat),dg=r(b.lng-a.lng),h=Math.sin(dl/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function eta(pos,s){if(!(s.lat&&s.lng))return null;const km=dist(pos,{lat:+s.lat,lng:+s.lng})*1.4;return {km:Math.round(km*10)/10,min:Math.max(1,Math.round(km/35*60))}}
+const fmt=m=>m<60?m+' min':Math.floor(m/60)+' h '+(m%60)+' min';
+let curAt=0,watchId=null,busy={};
+function hideWel(){const w=$('#wel');w.style.transition='opacity .35s';w.style.opacity='0';setTimeout(()=>{w.style.display='none';w.style.opacity='1'},350)}
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';setTimeout(()=>{e.style.display='none'},5000)}
+function ensureWatch(){const on=signed()&&myT.some(t=>t.status==='ongoing');
+ if(on&&watchId===null&&navigator.geolocation){try{watchId=navigator.geolocation.watchPosition(onPos,()=>{},{enableHighAccuracy:true,maximumAge:5000})}catch(e){}}
+ else if(!on&&watchId!==null){try{navigator.geolocation.clearWatch(watchId)}catch(e){}watchId=null}}
+async function onPos(p){
+ const pos={lat:+p.coords.latitude.toFixed(6),lng:+p.coords.longitude.toFixed(6),acc:Math.round(p.coords.accuracy)};
+ if(pos.acc>100)return;
+ for(const t of myT.filter(x=>x.status==='ongoing')){
+  const s=find(t.spot);if(!s||!(s.lat&&s.lng)||busy[t.at])continue;
+  if(dist(pos,{lat:+s.lat,lng:+s.lng})*1000<=50){busy[t.at]=1;
+   try{await db.doc('trips/'+uid).set({items:myT.map(x=>x.at===t.at?{...x,status:'finished',finishedAt:Date.now(),auto:true,end:pos}:x)});toast('You arrived at '+s.name+'. Trip marked finished.')}catch(e){delete busy[t.at]}}}}
+const cnt=k=>Object.values(T).reduce((n,a)=>n+((a.items||[]).filter(x=>x.spot===k).length),0);
+async function go(k){
+ if(!signed()){needAcct();return}
+ const s=find(k);if(!s)return;
+ open(`<h3>Getting your location…</h3><div class="sm">Please allow location access. Your starting point is recorded when you go to a spot.</div>`);
+ let pos;try{pos=await loc()}catch(e){
+  open(`<h3>Location is required</h3><div class="sm">Allow location access for this app in your phone or browser settings, then try again.</div><button class="go" style="margin-top:12px" data-go="${esc(k)}">Try again</button><button class="sec" id="x">Cancel</button>`);return}
+ const et=eta(pos,s),at=Date.now(),here='https://maps.google.com/?q='+pos.lat+','+pos.lng;curAt=at;
+ try{await db.doc('trips/'+uid).set({items:[{at,spot:k,name:s.name,status:'ongoing',start:pos,eta:et?et.min:null,km:et?et.km:null,notified:''},...myT].slice(0,200)})}catch(e){}
+ const body=`Hi ${C.name||''},\n\n${who().name} is heading to ${s.name} now.\nAddress: ${s.addr}${s.city?', '+s.city:''}${s.prov?', '+s.prov:''}\nStarting point: ${here}\nDestination: ${mapsUrl(s)}\n${et?'Estimated travel: about '+fmt(et.min)+'\n':''}Time: ${new Date(at).toLocaleString()}\n\nIf you don’t hear from me by tonight, please check on me or call local rescue.`;
+ const mail='mailto:'+encodeURIComponent(C.email)+'?subject='+encodeURIComponent('LAAGANAN alert: heading to '+s.name)+'&body='+encodeURIComponent(body);
+ open(`<h3>Going to ${esc(s.name)}</h3><div class="msg" style="margin-top:6px">📍 Starting point recorded<br>${et?`⏱ Estimated travel: about <b>${fmt(et.min)}</b> (~${et.km} km by road, rough estimate)`:'⏱ No coordinates saved for this spot yet. Open Google Maps for the live travel time.'}<br>✅ Your trip finishes automatically when you are within 50 m of the spot${s.lat&&s.lng?'':' (needs saved coordinates)'}.</div>${C.email?`<label style="display:flex;gap:8px;align-items:center;margin:12px 0 0;font-size:14px;color:var(--tx)"><input type="checkbox" id="ne" style="width:auto" checked> Notify ${esc(C.name||C.email)} (optional)</label><div id="es"><div class="msg">${esc(body)}</div><a href="${mail}" id="snd" style="text-decoration:none"><button class="go">✉️ Send alert email</button></a></div>`:`<div class="sm" style="margin:10px 0">No emergency contact set. The email alert is optional; add one in the 👤 Account tab.</div>`}
+ <a href="${mapsUrl(s)}" target="_blank" rel="noopener" style="text-decoration:none"><button class="sec">🧭 Open Google Maps</button></a><button class="sec" data-sos="${esc(k)}">🆘 Emergency numbers</button><button class="sec" id="totrips">View My Trips</button><button class="sec" id="x" style="border-color:var(--bd);color:var(--mut)">Close</button>`);
+}
+async function markSent(email){if(!myT.some(x=>x.at===curAt))return;try{await db.doc('trips/'+uid).set({items:myT.map(x=>x.at===curAt?{...x,notified:email}:x)})}catch(e){}}
+function finForm(at){open(`<h3>Finish trip</h3><div class="sm">A photo from the spot is required to mark this trip as finished.</div><label class="go" style="display:block;text-align:center;margin-top:12px">📷 Take or upload photo<input type="file" accept="image/*" id="ff" data-at="${at}" style="display:none"></label><div id="fmsg" class="sm" style="margin-top:8px"></div><button class="sec" id="x">Cancel</button>`)}
+function tripsView(m){
+ const on=myT.filter(t=>t.status==='ongoing'),done=myT.filter(t=>t.status!=='ongoing');
+ const card=t=>`<div class="card"><div class="row"><div class="info"><div class="name" style="font-size:16px">${esc(t.name)}</div><div class="addr">Started ${new Date(t.at).toLocaleString()}${t.start?`<br>From <a href="https://maps.google.com/?q=${t.start.lat},${t.start.lng}" target="_blank" rel="noopener" style="color:var(--g)">${t.start.lat}, ${t.start.lng}</a>`:''}${t.eta!=null?`<br>Est. travel ~${fmt(t.eta)}`:''}${t.notified?'<br>Alert sent to '+esc(t.notified):''}${t.finishedAt?'<br>✅ Finished '+new Date(t.finishedAt).toLocaleString():''}${t.auto?'<br>📍 Auto-finished on arrival (within 50 m)':''}</div></div>${t.photo?`<img src="${bu(esc(t.photo))}" data-v="${esc(t.photo)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:10px">`:''}</div>${t.status==='ongoing'?`<div class="btns"><button class="sec" data-map="${esc(t.spot)}">🧭 Navigate</button><button class="go" data-fin="${t.at}">Finished</button></div>`:''}</div>`;
+ m.innerHTML=(on.length?'<div class="h2">Ongoing</div>'+on.map(card).join(''):'')+(done.length?'<div class="h2">Finished / past</div>'+done.map(card).join(''):'')||'<div class="empty">No trips yet. Tap “Go to spot” on a spot.</div>';
+}
+function spotForm(s){open(`<h3>${s?'Edit spot':'Add a spot'}</h3><label>Name</label><input id="fn" value="${esc(s&&s.name)}"><label>Full address</label><textarea id="fa" rows="2">${esc(s&&s.addr)}</textarea>
+ <label>Spot type *</label><select id="ft" style="width:100%"><option value="">Select type</option>${Object.keys(TYPES).map(t=>`<option${s&&s.type===t?' selected':''}>${esc(t)}</option>`).join('')}</select><div id="ftd" class="sm" style="margin-top:4px">${s&&TYPES[s.type]?esc(TYPES[s.type]):''}</div>
+ <label>Province *</label><select id="fp2" style="width:100%">${provOpts(s&&s.prov)}</select>
+ <label>City / Municipality *</label><select id="fc2" style="width:100%">${cityOpts(s&&s.prov,s&&s.city)}</select><input id="fc3" placeholder="Type city or municipality" value="${esc(s&&s.city&&!(CITIES[s.prov]||[]).includes(s.city)?s.city:'')}" style="margin-top:6px;display:${s&&s.city&&!(CITIES[s.prov]||[]).includes(s.city)?'block':'none'}">
+ <div id="fm" class="sm" style="color:#c0392b;margin-top:6px"></div>
+ <label>Latitude, longitude (recommended: enables the travel-time estimate)</label><button class="sec" id="useloc" type="button" style="margin:0 0 6px">📍 Use my current location</button><input id="fl" value="${s&&s.lat&&s.lng?esc(s.lat+', '+s.lng):''}" placeholder="10.3157, 123.8854">
+ <button class="go" style="margin-top:14px" id="fs" data-k="${esc(s?s.key:'')}">Save spot</button>${s?`<button class="sec" id="fd" data-k="${esc(s.key)}" style="border-color:#c0392b;color:#c0392b">Delete spot</button>`:''}<button class="sec" id="x">Cancel</button>`)}
+
+async function saveSpot(k){
+ const n=$('#fn').value.trim(),a=$('#fa').value.trim(),pv=$('#fp2').value.trim(),tp=$('#ft').value,ct=$('#fc2').value==='__o'?$('#fc3').value.trim():$('#fc2').value;if(!n||!a||!tp||!pv||!ct){$('#fm').textContent='Name, address, spot type, province and city are required.';return}const l=pll($('#fl').value);
+ const f={name:n,addr:a,type:tp,prov:pv,city:ct,lat:l[0],lng:l[1]};
+ try{
+  if(!k){
+   if(adm)await db.collection('spots').add({...f,e:EM[B.length%5],c:CL[B.length%5]});
+   else{const id=String(Date.now());await db.doc('userspots/'+uid).set({items:[...((U[uid]||{}).items||[]),{id,...f,e:EM[id%5],c:CL[id%5]}]})}
+  }else{const s=find(k);
+   if(!s.owner)await db.doc('spots/'+s.id).update(f);
+   else await db.doc('userspots/'+s.owner).set({items:(U[s.owner].items||[]).map(x=>x.id===s.id?{...x,...f}:x)});}
+  close();
+ }catch(e){alert('Could not save: '+(e.message||e.code))}
+}
+async function delSpot(k){const s=find(k);
+ try{if(!s.owner)await db.doc('spots/'+s.id).delete();else await db.doc('userspots/'+s.owner).set({items:(U[s.owner].items||[]).filter(x=>x.id!==s.id)});close()}catch(e){alert('Could not delete')}}
+
+document.addEventListener('change',async e=>{
+ if(e.target.id==='ne')$('#es').style.display=e.target.checked?'block':'none';
+ if(e.target.id==='ff'&&e.target.files[0]){const at=+e.target.dataset.at,f=e.target.files[0],mg=$('#fmsg');if(f.size>MAXB){mg.textContent='Each photo must be 5 MB or less.';return}mg.textContent='Uploading…';
+  try{const as=await claude.use('assets');if(!as)throw {message:'Uploads are not available for your access level.'};
+   const t=myT.find(x=>x.at===at),r=await as.upload(f);
+   await db.doc('trips/'+uid).set({items:myT.map(x=>x.at===at?{...x,status:'finished',finishedAt:Date.now(),photo:r.id}:x)});
+   if(myCount(t.spot)<MAXP)await db.doc('photos/'+uid).set({items:[...((P[uid]||{}).items||[]),{spot:t.spot,aid:r.id,at:Date.now()}]});close();
+  }catch(err){mg.textContent='Failed: '+(err.message||err.code||'error')}}
+ if(e.target.id==='av'&&e.target.files[0]){const f=e.target.files[0];if(f.size>MAXB){alert('Each photo must be 5 MB or less.');return}
+  try{const as=await claude.use('assets');if(!as)throw {message:'Uploads are not available for your access level.'};const r=await as.upload(f);await db.doc('accounts/'+uid).update({avatar:r.id})}catch(err){alert('Upload failed: '+(err.message||err.code||'error'))}}
+ if(e.target.id==='sf'&&e.target.files[0]){const s0=find(e.target.dataset.k);
+  if(!canSp(s0)){alert('Only the account that added this spot can upload spot photos.');return}
+  {const er=chk(e.target.dataset.k,e.target.files[0]);if(er){alert(er);return}}
+  try{const as=await claude.use('assets');if(!as)throw {message:'Uploads are not available for your access level.'};const r=await as.upload(e.target.files[0]),np=[...(s0.photos||[]),r.id];
+   if(!s0.owner)await db.doc('spots/'+s0.id).update({photos:np});
+   else await db.doc('userspots/'+s0.owner).set({items:(U[s0.owner].items||[]).map(x=>x.id===s0.id?{...x,photos:np}:x)});
+  }catch(err){alert('Upload failed: '+(err.message||err.code||'error'))}}
+ if(e.target.id==='ft')$('#ftd').textContent=TYPES[e.target.value]||'';
+ if(e.target.id==='fltt'){ftp=e.target.value;render()}
+ if(e.target.id==='cimg'&&e.target.files[0]){const f=e.target.files[0],mg=$('#cmsg');if(f.size>MAXB){mg.textContent='Max 5 MB.';return}mg.textContent='Uploading…';
+  try{const as=await claude.use('assets');if(!as)throw {message:'x'};const r=await as.upload(f);catImg=r.id;mg.textContent='Icon image uploaded ✓ (tap Save)'}catch(err){mg.textContent='Upload failed.'}}
+ if(e.target.id==='fp2'){$('#fc2').innerHTML=cityOpts(e.target.value,'');$('#fc3').style.display='none'}
+ if(e.target.id==='fc2')$('#fc3').style.display=e.target.value==='__o'?'block':'none';
+ if(e.target.id==='fltp'){fp=e.target.value;fc='';render()}
+ if(e.target.id==='fltc'){fc=e.target.value;render()}
+ if(e.target.id==='pf'&&e.target.files[0]){
+  const k=e.target.dataset.k,f=e.target.files[0];
+  if(!signed()){needAcct();return}
+  {const er=chk(k,f);if(er){alert(er);return}}
+  try{const as=await claude.use('assets');if(!as)throw {message:'Uploads are not available for your access level.'};
+   const r=await as.upload(f);
+   await db.doc('photos/'+uid).set({items:[...((P[uid]||{}).items||[]),{spot:k,aid:r.id,at:Date.now()}]});
+  }catch(err){alert('Upload failed: '+(err.message||err.code||'error'))}
+ }
+});
+document.addEventListener('click',async e=>{
+ const t=e.target.closest('button,a,[data-t],[data-v],[data-gal],[data-det],[data-stat]');if(!t)return;
+ const d=t.dataset;
+ if(d.t){tab=d.t;aco='';render()}
+ else if(d.map)window.open(mapsUrl(find(d.map)),'_blank','noopener');
+ else if(d.go)go(d.go);
+ else if(d.fin)finForm(+d.fin);
+ else if(d.det)detail(d.det);
+ else if(d.ecat)catForm(d.ecat);
+ else if(t.id==='addcat')catForm(null);
+ else if(t.id==='crm'){catImg='';$('#cmsg').textContent='The image will be removed when you save.'}
+ else if(t.id==='cs'){const nm=catEdit||$('#cnm').value.trim();if(nm.length<2){$('#cmsg').textContent='Enter a category name.';return}
+  const ex=CATS.find(x=>x.name===nm),id='cat_'+nm.toLowerCase().replace(/[^a-z0-9]+/g,'_'),img=catImg!==undefined?catImg:((ex&&ex.img)||(TS[nm]&&TS[nm][3])||'');
+  try{await db.doc('categories/'+id).set({name:nm,desc:$('#cds').value.trim(),icon:$('#cic').value.trim()||'📍',color:$('#ccl').value,short:(ex&&ex.short)||'',img,at:(ex&&ex.at)||Date.now()});close()}catch(e){$('#cmsg').textContent='Could not save.'}}
+ else if(t.id==='cd'){if(t.dataset.c!=='1'){t.dataset.c='1';t.textContent='Tap again to confirm'}else{try{await db.doc('categories/cat_'+catEdit.toLowerCase().replace(/[^a-z0-9]+/g,'_')).delete();close()}catch(e){}}}
+ else if(t.id==='fgt'){rec={step:1,tries:0};render()}
+ else if(t.id==='rx'){rec=null;amode='in';render()}
+ else if(t.id==='rc'){const u=$('#ru').value.trim().toLowerCase(),er=$('#rm'),bad='No account found for that username on this device.';
+  try{
+   if(myAcc&&myAcc.hash&&u===String(myAcc.username).toLowerCase()){if(!myAcc.q){er.textContent='This account has no security question. Sign in another way or ask the admin.';return}rec={step:2,type:'u',q:myAcc.q,qs:myAcc.qs,qh:myAcc.qh,tries:0};render();return}
+   if(own){const c=(await db.doc('config/admin').get()).data();if(c&&u===String(c.user).toLowerCase()&&c.qh){rec={step:2,type:'a',q:c.q,qs:c.qs,qh:c.qh,tries:0};render();return}}
+   er.textContent=bad}catch(e){er.textContent=bad}}
+ else if(t.id==='rs'){const a=$('#ra').value.trim().toLowerCase(),np=$('#rn').value,er=$('#rm');
+  if(np.length<5){er.textContent='New password must be 5+ characters.';return}
+  try{
+   if(await H(a,rec.qs)!==rec.qh){rec.tries++;if(rec.tries>=5){rec=null;render()}else er.textContent='Wrong answer. '+(5-rec.tries)+' tries left.';return}
+   const sl=salt(),h=await H(np,sl);
+   if(rec.type==='u')await db.doc('accounts/'+uid).update({salt:sl,hash:h});
+   else{const c=(await db.doc('config/admin').get()).data();await db.doc('config/admin').set({...c,salt:sl,hash:h})}
+   rec={step:3};render()}catch(e){const el=$('#rm');if(el)el.textContent='Could not reset password.'}}
+ else if(t.id==='sqb'){const pw=$('#sqp').value,q=$('#sqq').value,a=$('#sqa').value.trim().toLowerCase();let msg='',ok2=false;
+  if(a.length<3)msg='Answer must be 3+ characters.';
+  else try{if(await H(pw,myAcc.salt)!==myAcc.hash)msg='Current password is wrong.';else{const s2=salt();await db.doc('accounts/'+uid).update({q,qs:s2,qh:await H(a,s2)});msg='Security question saved ✓';ok2=true}}catch(e){msg='Could not save.'}
+  const el=$('#sqm');if(el){el.style.color=ok2?'var(--g)':'#c0392b';el.textContent=msg}}
+ else if(d.stat)statSheet(d.stat);
+ else if(t.id==='gadm'){tab='admin';render()}
+ else if(t.id==='aback'){tab='acct';render()}
+ else if(d.dm||d.dsp){if(t.dataset.c!=='1'){t.dataset.c='1';t.textContent='Sure?';return}
+  try{if(d.dm)await db.doc('photos/'+uid).set({items:((P[uid]||{}).items||[]).filter(x=>!(x.aid===d.dm&&x.spot===gal))});
+   else{const sp=find(gal),np=(sp.photos||[]).filter(x=>x!==d.dsp);if(!sp.owner)await db.doc('spots/'+sp.id).update({photos:np});else await db.doc('userspots/'+sp.owner).set({items:(U[sp.owner].items||[]).map(x=>x.id===sp.id?{...x,photos:np}:x)})}
+  }catch(e){alert('Could not delete.')}}
+ else if(d.as){asub=d.as;aq='';aco='';render()}
+ else if(d.ac){aco=aco===d.ac?'':d.ac;render()}
+ else if(d.ty){ftp=ftp===d.ty?'':d.ty;render()}
+ else if(d.vs){vs=d.vs;try{localStorage.setItem('ts_vs',vs)}catch(e){}render()}
+ else if(d.ao){aopen=aopen.includes(d.ao)?aopen.filter(x=>x!==d.ao):[...aopen,d.ao];render()}
+ else if(t.id==='add2')spotForm(null);
+ else if(t.id==='dback')closeDet();
+ else if(t.id==='wlogin'){amode='in';tab='acct';ss('ts_guest','1');hideWel();render()}
+ else if(t.id==='wsign'){amode='up';tab='acct';ss('ts_guest','1');hideWel();render()}
+ else if(t.id==='wguest'){ss('ts_guest','1');hideWel()}
+ else if(d.am!==undefined){amode=d.am||null;render()}
+ else if(d.sos)sos(d.sos);
+ else if(d.lgu)lguForm(G.find(g=>lguId(g.prov,g.city)===d.lgu));
+ else if(t.id==='addlgu')lguForm(null);
+ else if(t.id==='ls'){const pv=$('#fp2').value,ct=$('#fc2').value==='__o'?$('#fc3').value.trim():$('#fc2').value,en=$('#le').value.split('\n').map(x=>x.split('|')).map(a=>({l:(a[0]||'').trim(),n:a.slice(1).join('|').trim()})).filter(e=>e.l&&e.n);
+  if(!pv||!ct||!en.length){$('#fm').textContent='Province, city and at least one “Label | Number” line are required.';return}
+  try{await db.doc('lgu/'+lguId(pv,ct)).set({prov:pv,city:ct,entries:en});close()}catch(e){$('#fm').textContent='Could not save.'}}
+ else if(t.id==='ld'){if(t.dataset.c!=='1'){t.dataset.c='1';t.textContent='Tap again to confirm'}else{try{await db.doc('lgu/'+d.id).delete();close()}catch(e){}}}
+ else if(d.sv){if(!signed()||!myAcc){needAcct();return}const a=myAcc.saved||[],n=a.includes(d.sv)?a.filter(x=>x!==d.sv):[...a,d.sv];try{await db.doc('accounts/'+uid).update({saved:n})}catch(e){}}
+ else if(d.v)lb(d.v,gal&&d.g?(d.g==='sp'?(find(gal).photos||[]):photos(gal).map(p=>p.aid)):null);
+ else if(t.id==='th')theme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+ else if(t.id==='lbx')$('#lb').style.display='none';
+ else if(t.id==='lbp'){lbI=(lbI+lbL.length-1)%lbL.length;showLb()}
+ else if(t.id==='lbn'){lbI=(lbI+1)%lbL.length;showLb()}
+ else if(d.gal)gallery(d.gal);
+ else if(d.edit)spotForm(find(d.edit));
+ else if(t.id==='x')close();
+ else if(t.id==='toacct'){close();closeDet();tab='acct';render()}
+ else if(t.id==='totrips'){close();closeDet();tab='trips';render()}
+ else if(t.id==='useloc'){try{const p=await loc();$('#fl').value=p.lat+', '+p.lng}catch(e){$('#fm').textContent='Could not get your location. Allow location access and try again.'}}
+ else if(t.id==='upb'){const c=$('#upc').value,n=$('#upn').value;let msg='';
+  if(n.length<5)msg='New password must be 5+ characters.';
+  else try{if(await H(c,myAcc.salt)!==myAcc.hash)msg='Current password is wrong.';else{const sl=salt();await db.doc('accounts/'+uid).update({salt:sl,hash:await H(n,sl)});msg='ok'}}catch(e){msg='Could not update.'}
+  const el=$('#upm');if(el){el.style.color=msg==='ok'?'var(--g)':'#c0392b';el.textContent=msg==='ok'?'Password updated ✓':msg}}
+ else if(t.id==='add'){signed()?spotForm(null):needAcct()}
+ else if(t.id==='fs')saveSpot(d.k);
+ else if(t.id==='fd'){if(t.dataset.c!=='1'){t.dataset.c='1';t.textContent='Tap again to confirm'}else delSpot(d.k)}
+ else if(t.id==='sb'){const f=$('#flt'),on=f.style.display!=='flex';f.style.display=on?'flex':'none';if(!on){fp='';fc='';ftp='';render()}}
+ else if(t.id==='sc'){if(!signed()||!myAcc){needAcct();return}try{await db.doc('accounts/'+uid).update({contactName:$('#cn').value.trim(),contactEmail:$('#ce').value.trim()});t.textContent='Saved ✓'}catch(e){t.textContent='Could not save'}}
+ else if(t.id==='mk'){const n=$('#an').value.trim(),u=$('#au').value.trim(),p=$('#ap').value,em=$('#ae').value.trim(),sq=$('#asq').value,sa=$('#asa').value.trim().toLowerCase();
+  if(!n||!u||p.length<5||sa.length<3){$('#am').textContent='Name, username, a password (5+) and a security answer (3+) are required.';return}
+  try{const sl=salt(),s2=salt();await db.doc('accounts/'+uid).set({...(myAcc||{}),name:n,email:em,username:u,salt:sl,hash:await H(p,sl),q:sq,qs:s2,qh:await H(sa,s2),at:(myAcc&&myAcc.at)||Date.now()});sess=true;ss('ts_sess',uid);render()}catch(e){$('#am').textContent='Could not save account.'}}
+ else if(t.id==='sq'){const a=$('#qa').value.trim().toLowerCase(),er=$('#qe');
+  try{if(pend&&await H(a,pend.qs)===pend.qh){pend=null;adm=true;sess=false;ss('ts_sess');ss('ts_adm',uid);render()}else{tries++;if(tries>=5){pend=null;render()}else er.textContent='Wrong answer. '+(5-tries)+' tries left.'}}catch(e){er.textContent='Verification failed.'}}
+ else if(t.id==='qc'){pend=null;render()}
+ else if(t.id==='cq'){const pw=$('#qpw').value,q=$('#qq').value.trim(),a=$('#qans').value.trim().toLowerCase(),mg=$('#qm');
+  try{const c=(await db.doc('config/admin').get()).data();
+   if(await H(pw,c.salt)!==c.hash){mg.textContent='Current password is wrong.';return}
+   if(q.length<5||a.length<3){mg.textContent='Enter a question (5+ characters) and an answer (3+ characters).';return}
+   const sl=salt();await db.doc('config/admin').set({...c,q,qs:sl,qh:await H(a,sl)});mg.style.color='var(--g)';mg.textContent='Security question updated ✓'}catch(e){mg.textContent='Could not update.'}}
+ else if(t.id==='so'){amode=null;pend=null;sess=false;adm=false;ss('ts_sess');ss('ts_adm');tab='acct';render()}
+ else if(t.id==='si'){const u=$('#su').value.trim().toLowerCase(),p=$('#sp').value,msg=$('#sm'),bad='Wrong username or password.';
+  try{
+   if(myAcc&&myAcc.hash&&u===String(myAcc.username).toLowerCase()){if(await H(p,myAcc.salt)===myAcc.hash){adm=false;ss('ts_adm');pend=null;sess=true;ss('ts_sess',uid);render()}else msg.textContent=bad;return}
+   if(!own){msg.textContent=bad;return}
+   const r=await db.doc('config/admin').get();let c=r.exists?r.data():null;
+   if(!c){if(u==='adminraver'&&p==='12345'){const sl=salt();c={user:'AdminRaver',salt:sl,hash:await H('12345',sl)};await db.doc('config/admin').set(c)}else{msg.textContent=bad;return}}
+   else if(!(u===String(c.user).toLowerCase()&&await H(p,c.salt)===c.hash)){msg.textContent=bad;return}
+   if(c.qh){pend=c;tries=0;render();return}adm=true;sess=false;ss('ts_sess');ss('ts_adm',uid);render();
+  }catch(e){msg.textContent='Sign-in failed.'}}
+ else if(t.id==='cadm'){const cp=$('#cpw').value,nu=$('#cnu').value.trim(),np=$('#cnp').value,mg=$('#cam');
+  try{const c=(await db.doc('config/admin').get()).data();
+   if(await H(cp,c.salt)!==c.hash){mg.textContent='Current password is wrong.';return}
+   if(!nu||np.length<5){mg.textContent='Enter a username and a password of 5+ characters.';return}
+   const sl=salt();await db.doc('config/admin').set({...c,user:nu,salt:sl,hash:await H(np,sl)});mg.style.color='var(--g)';mg.textContent='Updated ✓'}catch(e){mg.textContent='Could not update.'}}
+ if(t.closest('#snd'))markSent(C.email);
+});
+document.addEventListener('input',e=>{if(e.target.id==='aq'){aq=e.target.value.toLowerCase();$('#alist').innerHTML=aList()}});
+$('#search').addEventListener('input',e=>{q=e.target.value.toLowerCase();render()});
+$('#sheet').addEventListener('click',e=>{if(e.target.id==='sheet')close()});
+
+(async()=>{
+ try{db=await claude.use('db');user=await claude.use('user')}catch(e){}
+ if(!db||!user){$('#main').innerHTML='<div class="empty">Please open this app while signed in to claude.ai (as a member or invited guest) to use accounts, spots and photos.</div>';return}
+ uid=await user.id();own=await user.isOwner();
+ if(!uid){$('#main').innerHTML='<div class="empty">Sign in to claude.ai to use this app.</div>';return}
+ ok=true;sess=sg('ts_sess')===uid;adm=own&&sg('ts_adm')===uid;if(!sess&&!adm&&sg('ts_guest')!=='1')$('#wel').style.display='flex';
+ const sub=(path,fn)=>db.collection(path).onSnapshot(s=>{fn(s);render()},()=>{});
+ sub('spots',s=>{B=s.docs.map(d=>({id:d.id,...d.data()}))});
+ sub('userspots',s=>{U={};s.docs.forEach(d=>U[d.id]=d.data())});
+ sub('categories',s=>{CATS=s.docs.map(d=>d.data()).sort((a,b)=>(a.at||0)-(b.at||0));applyCats(CATS)});
+ sub('weather',s=>{W=s.docs.map(d=>d.data())});
+ sub('lgu',s=>{G=s.docs.map(d=>d.data())});
+ sub('photos',s=>{P={};s.docs.forEach(d=>P[d.id]=d.data())});
+ if(own){sub('accounts',s=>{A={};s.docs.forEach(d=>A[d.id]=d.data())});sub('trips',s=>{T={};s.docs.forEach(d=>T[d.id]=d.data())})}
+ db.doc('accounts/'+uid).onSnapshot(s=>{myAcc=s.exists?s.data():null;C={name:(myAcc&&myAcc.contactName)||'',email:(myAcc&&myAcc.contactEmail)||''};render()},()=>{});
+ db.doc('trips/'+uid).onSnapshot(s=>{myT=s.exists?(s.data().items||[]):[];render()},()=>{});
+ render();
+})();
+</script></body></html>
